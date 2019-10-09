@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
                 this.angularFire.list(`usuarios/${ok.user.uid}`).valueChanges().subscribe(
                     (data: any) => {
                         localStorage.setItem('usuario', window.btoa(data));
-                        localStorage.setItem('userCity', data[3].id);
+                        localStorage.setItem('userCity', data[3]);
                         this.toastr.success(`Seja bem-vindo ao sistema, ${data[2]}`, 'Bem-vindo!');
                         this.isLoading = false;
                         this.router.navigate(['/mapa'])

@@ -14,7 +14,7 @@ import { Regiao } from '../../regiao/regiao';
     templateUrl: './igreja-modal.component.html',
     styleUrls: ['./igreja-modal.component.scss']
 })
-export class IgrejaModalComponent implements OnInit {
+export class IgrejaModalComponent {
 
     @ViewChild('createModal') createModal: ModalDirective;
     public igreja = new Igreja;
@@ -60,17 +60,6 @@ export class IgrejaModalComponent implements OnInit {
 
     constructor(private angularFire: AngularFireDatabase, private toastr: ToastrService) { }
 
-    ngOnInit() {
-        this.getRegioes();
-    }
-
-    getRegioes() {
-        this.angularFire.list(`regioes`).valueChanges().subscribe(
-            (data: Regiao[]) => {
-                this.regioes = data;
-            }
-        );
-    }
 
     checkLocale() {
         if (navigator.geolocation) {

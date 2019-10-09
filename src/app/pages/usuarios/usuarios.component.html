@@ -33,7 +33,7 @@
                   [ngClass]="{'zmdi-chevron-up':reverse,'zmdi-chevron-down':!reverse}"></i>
               </th>
               <th>E-mail</th>
-              <th>Cidade</th>
+              <!-- <th>Cidade</th> -->
               <th (click)="sort('role')" class="pointer">
                 Tipo usuário
                 <i class="zmdi" *ngIf="key =='role'"
@@ -55,7 +55,7 @@
               </td>
               <td>{{usuario.nome}}</td>
               <td>{{usuario.email}}</td>
-              <td>{{usuario.regiao && usuario.regiao.nome ? usuario.regiao.nome : "-"}}</td>
+              <!-- <td>{{usuario.regiao && usuario.regiao.nome ? usuario.regiao.nome : "-"}}</td> -->
               <td>{{usuario.role}}</td>
             </tr>
           </tbody>

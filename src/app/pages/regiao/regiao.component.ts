@@ -42,7 +42,7 @@ export class RegiaoComponent implements OnInit {
 
     getRegioes() {
         this.isLoaded = false;
-        this.angularFire.list(`regioes`).valueChanges().subscribe(
+        this.angularFire.list(`cidades`).valueChanges().subscribe(
             (data: Regiao[]) => {
                 this.regioes = data;
                 console.log(data)

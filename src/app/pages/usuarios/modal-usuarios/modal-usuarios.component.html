@@ -28,7 +28,7 @@
           <div class="form-group w-100">
             <label>Cidade</label>
             <select class="form-control" [(ngModel)]="usuario.regiao" name="regiao" #regiao="ngModel">
-                <option *ngFor="let regiao of regioes" [ngValue]="regiao">
+                <option *ngFor="let regiao of regioes" [ngValue]="regiao.id">
                     {{regiao.nome}}
                 </option>
             </select>

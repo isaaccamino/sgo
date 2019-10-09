@@ -81,5 +81,7 @@ export class HeaderComponent implements OnInit {
         this.afAuth.auth.signOut();
         console.clear();
         localStorage.removeItem('usuario');
+        localStorage.removeItem('userCity');
+        localStorage.removeItem('readNews');
     }
 }

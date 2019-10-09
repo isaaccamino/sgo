@@ -28,15 +28,15 @@ export class ModalUsuariosComponent implements OnInit {
         this.getRegioes();
         this.usuario = new Usuario;
     }
+
     getRegioes() {
         this.isLoading = true;
-        this.angularFire.list(`regioes`).valueChanges().subscribe(
+        this.angularFire.list(`cidades`).valueChanges().subscribe(
             (data: Regiao[]) => {
                 this.regioes = data;
                 this.isLoading = false;
             }
         );
-    
     }
 
     showModal(e?) {
@@ -56,7 +56,7 @@ export class ModalUsuariosComponent implements OnInit {
 
     onSubmit(form: NgForm) {
         if (this.isEditing) {
-            this.angularFire.list(`regioes/${localStorage.getItem('userCity')}/usuarios/`).set(`${this.usuario.id}`, form.value).then((t: any) => {
+            this.angularFire.list(`usuarios/`).set(`${this.usuario.id}`, form.value).then((t: any) => {
                 this.createModal.hide();
                 this.toastr.success('Usuário editado com sucesso!', 'Sucesso!');
             });
@@ -68,7 +68,7 @@ export class ModalUsuariosComponent implements OnInit {
             ).then((ok: any) => {
                 this.usuario.id = ok.user.uid;
                 form.value.id = ok.user.uid;
-                this.angularFire.list(`regioes/${localStorage.getItem('userCity')}/usuarios/`).set(`${this.usuario.id}`, form.value).then((t: any) => {
+                this.angularFire.list(`usuarios/`).set(`${this.usuario.id}`, form.value).then((t: any) => {
                     this.createModal.hide();
                     this.toastr.success('Usuário cadastrado com sucesso!', 'Sucesso!');
                 });

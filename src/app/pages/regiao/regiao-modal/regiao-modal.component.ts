@@ -43,7 +43,7 @@ export class RegiaoModalComponent implements OnInit {
     }
 
     onSubmit(form: NgForm): void {
-        this.angularFire.list(`regioes/`).set(`${this.regiao.id}`, form.value).then((t: any) => {
+        this.angularFire.list(`cidades/`).set(`${this.regiao.id}`, form.value).then((t: any) => {
             this.createModal.hide();
             this.regiao = new Regiao;
             this.toastr.success('Regiao salva com sucesso!', 'Sucesso!');
