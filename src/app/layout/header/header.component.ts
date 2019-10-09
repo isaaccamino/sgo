@@ -3,12 +3,13 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { SharedService } from './../../shared/services/shared.service';
 import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss'],
-    providers: [SharedService, AngularFireAuth],
+    providers: [SharedService, AngularFireAuth, AngularFireDatabase],
     animations: [
         trigger('toggleHeight', [
             state('inactive', style({
@@ -31,6 +32,8 @@ export class HeaderComponent implements OnInit {
     sidebarVisible = false;
     public userName: string;
     public userEmail: string;
+    public cidades: any;
+    public currentCity: any;
 
     itemsMenu = [
         { link: 'agenda', icon: 'zmdi-calendar-note', label: 'Agenda', role: ['ADMINGERAL', 'ADMIN', 'USER'] },
@@ -59,7 +62,7 @@ export class HeaderComponent implements OnInit {
         this.sharedService.setTheme(this.maThemeModel)
     }
 
-    constructor(private sharedService: SharedService, private afAuth: AngularFireAuth, private router: Router) {
+    constructor(private sharedService: SharedService, private afAuth: AngularFireAuth, private router: Router, private angularFire: AngularFireDatabase) {
         sharedService.maThemeSubject.subscribe((value) => {
             this.maThemeModel = value;
         });
@@ -72,9 +75,25 @@ export class HeaderComponent implements OnInit {
         const user = atob(localStorage.getItem('usuario')).split(',');
         this.userName = user[2];
         this.userEmail = user[0];
+        this.getRegioes();
     }
 
     closeMenu = () => document.getElementById('js-menu').click();
+
+    getRegioes() {
+        this.angularFire.list(`cidades`).valueChanges().subscribe(
+            (data: any) => {
+                this.cidades = data;
+                this.currentCity = data.filter((city: any) => city.id === localStorage.getItem('userCity'))[0]
+            }
+        );
+    }
+
+    selectCity(e: string) {
+        this.currentCity = this.cidades.filter((city: any) => city.id === e)[0]
+        localStorage.setItem('userCity', e)
+        window.location.reload();
+    }
 
     logout() {
         this.router.navigate(['']);

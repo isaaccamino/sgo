@@ -102,6 +102,13 @@
       </div>
     </li> -->
 
+    <li *ngIf="sharedService.getUserRole() === 'ADMINGERAL'">
+      <select class="form-control header-select" (change)="selectCity($event.target.value)" [(ngModel)]="currentCity.id">
+          <option *ngFor="let cidade of cidades" [value]="cidade.id" >
+              {{cidade.nome}}
+          </option>
+      </select>
+    </li>
     <li dropdown class="d-none d-sm-inline-block">
       <a (click)="logout()"> <i class="zmdi zmdi-power"></i></a>
 
