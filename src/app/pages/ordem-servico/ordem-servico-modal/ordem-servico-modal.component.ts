@@ -145,7 +145,7 @@ export class OrdemServicoModalComponent implements OnInit {
     }
 
     private getChurches() {
-        this.angularFire.list(`igrejas`).valueChanges().subscribe(
+        this.angularFire.list(`regioes/${localStorage.getItem('userCity')}/igrejas`).valueChanges().subscribe(
             data => this.churches = data
         );
     }
@@ -157,7 +157,7 @@ export class OrdemServicoModalComponent implements OnInit {
     }
 
     private getTecnicos() {
-        this.angularFire.list(`tecnicos`).valueChanges().subscribe(
+        this.angularFire.list(`regioes/${localStorage.getItem('userCity')}/tecnicos`).valueChanges().subscribe(
             data => this.tecnicos = data
         );
     }

@@ -39,7 +39,7 @@ export class TecnicoComponent implements OnInit {
 
     getTecnicos() {
         this.isLoaded = false;
-        this.angularFire.list(`tecnicos`).valueChanges().subscribe(
+        this.angularFire.list(`regioes/${localStorage.getItem('userCity')}/tecnicos`).valueChanges().subscribe(
             data => {
                 this.tecnicos = data;
                 this.isLoaded = true;

@@ -30,3 +30,30 @@ header {
   }
 
 }
+
+.fc {
+  .fc-day-header {
+      background-color: #592828;
+      color: #fff;
+  }
+
+  .fc-day-number {
+      float: left!important;
+      font-weight: bold;
+      margin-left: 8px;
+  }
+
+  td.fc-sun,
+  td.fc-sat {
+      background-color: #E8EAF6;
+      color: #592828;
+  }
+  .fc-title, .fc-time span, .fc-time {
+      color: #000;
+  }
+
+  .fc-now-indicator {
+      border: 1px solid red;
+      width: 100vw;
+  }
+}

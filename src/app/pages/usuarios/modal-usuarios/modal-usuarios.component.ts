@@ -5,6 +5,7 @@ import { ModalDirective } from 'ngx-bootstrap';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Usuario } from '../Usuario';
 import { ToastrService } from 'ngx-toastr';
+import { Regiao } from '../../regiao/regiao';
 
 @Component({
     selector: 'app-modal-usuarios',
@@ -16,12 +17,26 @@ export class ModalUsuariosComponent implements OnInit {
 
     @ViewChild('createModal') createModal: ModalDirective;
     public usuario = new Usuario;
+    public regioes: any[];
     public isEditing = false;
+    public isLoading: boolean;
     private DEFAULT_PASSWORD = 'ccbnovousuario';
 
     constructor(private afAuth: AngularFireAuth, private toastr: ToastrService, private angularFire: AngularFireDatabase) { }
 
     ngOnInit() {
+        this.getRegioes();
+        this.usuario = new Usuario;
+    }
+    getRegioes() {
+        this.isLoading = true;
+        this.angularFire.list(`regioes`).valueChanges().subscribe(
+            (data: Regiao[]) => {
+                this.regioes = data;
+                this.isLoading = false;
+            }
+        );
+    
     }
 
     showModal(e?) {
@@ -41,7 +56,7 @@ export class ModalUsuariosComponent implements OnInit {
 
     onSubmit(form: NgForm) {
         if (this.isEditing) {
-            this.angularFire.list(`usuarios/`).set(`${this.usuario.id}`, form.value).then((t: any) => {
+            this.angularFire.list(`regioes/${localStorage.getItem('userCity')}/usuarios/`).set(`${this.usuario.id}`, form.value).then((t: any) => {
                 this.createModal.hide();
                 this.toastr.success('Usuário editado com sucesso!', 'Sucesso!');
             });
@@ -53,7 +68,7 @@ export class ModalUsuariosComponent implements OnInit {
             ).then((ok: any) => {
                 this.usuario.id = ok.user.uid;
                 form.value.id = ok.user.uid;
-                this.angularFire.list(`usuarios/`).set(`${this.usuario.id}`, form.value).then((t: any) => {
+                this.angularFire.list(`regioes/${localStorage.getItem('userCity')}/usuarios/`).set(`${this.usuario.id}`, form.value).then((t: any) => {
                     this.createModal.hide();
                     this.toastr.success('Usuário cadastrado com sucesso!', 'Sucesso!');
                 });

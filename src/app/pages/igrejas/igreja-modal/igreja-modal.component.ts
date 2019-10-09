@@ -7,6 +7,7 @@ import { ModalDirective } from 'ngx-bootstrap';
 import { EventEmitter } from '@angular/core';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { Regiao } from '../../regiao/regiao';
 
 @Component({
     selector: 'app-igreja-modal',
@@ -17,11 +18,14 @@ export class IgrejaModalComponent implements OnInit {
 
     @ViewChild('createModal') createModal: ModalDirective;
     public igreja = new Igreja;
-    public tecnicos;
+    public regioes: any[];
+    public tecnicos: any[];
     public geoLocationNotSupp = false;
 
-    public lat;
-    public lng;
+    public isLoaded: boolean;
+
+    public lat:any;
+    public lng:any;
 
     public states = [
         { value: '' , estado: 'Selecione um estado'},
@@ -57,7 +61,15 @@ export class IgrejaModalComponent implements OnInit {
     constructor(private angularFire: AngularFireDatabase, private toastr: ToastrService) { }
 
     ngOnInit() {
-        // this.getEncarregados();
+        this.getRegioes();
+    }
+
+    getRegioes() {
+        this.angularFire.list(`regioes`).valueChanges().subscribe(
+            (data: Regiao[]) => {
+                this.regioes = data;
+            }
+        );
     }
 
     checkLocale() {
@@ -95,7 +107,7 @@ export class IgrejaModalComponent implements OnInit {
     onSubmit(form: NgForm): void {
         form.value.numCel = form.value.numCel ? form.value.numCel : '';
         form.value.ordemServico = this.igreja.ordemServico ? this.igreja.ordemServico : [];
-        this.angularFire.list(`igrejas/`).set(`${this.igreja.id}`, form.value).then((t: any) => {
+        this.angularFire.list(`regioes/${localStorage.getItem('userCity')}/igrejas/`).set(`${this.igreja.id}`, form.value).then((t: any) => {
             this.createModal.hide();
             this.igreja = new Igreja;
             this.toastr.success('Igreja salva com sucesso!', 'Sucesso!');

@@ -56,6 +56,8 @@ import { EmailComponent } from './pages/email/email.component';
 import { NewsModalComponent } from './shared/components/news-modal/news-modal.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { PieChartComponent } from './pages/dashboard/pie-chart/pie-chart.component';
+import { RegiaoComponent } from './pages/regiao/regiao.component';
+import { RegiaoModalComponent } from './pages/regiao/regiao-modal/regiao-modal.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -94,7 +96,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     EmailComponent,
     NewsModalComponent,
     DashboardComponent,
-    PieChartComponent
+    PieChartComponent,
+    RegiaoComponent,
+    RegiaoModalComponent,
   ],
   imports: [
     BrowserModule,

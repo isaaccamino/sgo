@@ -20,7 +20,14 @@ export class DeleteModalComponent implements OnInit {
     ngOnInit() {
     }
 
-    showModal(id, name, route, optional?) {
+    /**
+     * 
+     * @param id String | Number ID of the element
+     * @param name String | Number Name of the element
+     * @param route String Name of the route to delete
+     * @param optional Any Optional parameter
+     */
+    showModal(id: string | number, name: string, route: string, optional?: any) {
         this.data.id = id;
         this.data.nome = name;
         this.data.route = route;
@@ -34,7 +41,7 @@ export class DeleteModalComponent implements OnInit {
 
     remove() {
         this.angularFire.list(`${this.data.route}`).remove(`${this.data.id}`).then(
-            res => {
+            () => {
                 this.createModal.hide();
                 this.toastr.success(`Removido com sucesso!`, 'Sucesso!');
                 if (this.data.route === 'ordemServico') {

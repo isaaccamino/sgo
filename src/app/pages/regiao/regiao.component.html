@@ -1,0 +1,62 @@
+<app-header></app-header>
+<app-regiao-modal></app-regiao-modal>
+<app-delete-modal></app-delete-modal>
+<app-loader *ngIf="!isLoaded"></app-loader>
+
+<section class="content">
+    <header class="content__title">
+        <h1>Regiões</h1>
+        <div class="actions">
+            <button class='btn btn-add' (click)="showModal()">
+                <i class="actions__item zmdi zmdi-plus"></i>
+                <span>Adicionar região</span>
+            </button>
+        </div>
+    </header>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="data-table__header">
+                <div class="form-group data-table__filter">
+                    <input autocomplete="false" placeholder="Filtrar por todas as colunas" [(ngModel)]="filter"
+                        class="form-control">
+                    <i class="form-group__bar"></i>
+                </div>
+            </div>
+            <div class="table-responsive" *ngIf="isLoaded; else notLoaded">
+                <table class="table table-striped mb-0">
+                    <thead>
+                        <tr>
+                            <th>Ação</th>
+                            <th (click)="sort('nome')" class="pointer">
+                                Nome
+                                <i class="zmdi" *ngIf="key =='nome'" [ngClass]="{'zmdi-chevron-up':reverse,'zmdi-chevron-down':!reverse}"></i>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            *ngFor="let regiao of regioes | orderBy: key : reverse : true | filter:filter | paginate: { itemsPerPage: 10, currentPage: page };">
+                            <td>
+                                <div dropdown>
+                                    <i dropdownToggle class="actions__item zmdi zmdi-more-vert"></i>
+                                    <div *dropdownMenu class="dropdown-menu dropdown-menu-right">
+                                        <span class="dropdown-item" (click)="showModal(regiao)">Editar</span>
+                                        <span class="dropdown-item" (click)="delete(regiao)">Excluir</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>{{regiao.nome}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <pagination-controls (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Próximo">
+                </pagination-controls>
+            </div>
+            <ng-template #notLoaded>
+                <p>Loading...</p>
+            </ng-template>
+        </div>
+    </div>
+
+</section>

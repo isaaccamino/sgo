@@ -74,7 +74,7 @@ export class ModalTecnicoComponent implements OnInit {
 
     onSubmit(form: NgForm) {
         form.value.complemento = form.value.complemento ? form.value.complemento : '';
-        this.angularFire.list(`tecnicos/`).set(`${this.tecnico.id}`, form.value).then((t: any) => {
+        this.angularFire.list(`regioes/${localStorage.getItem('userCity')}/tecnicos/`).set(`${this.tecnico.id}`, form.value).then((t: any) => {
             this.createModal.hide();
             this.tecnico = new Tecnico;
             this.toastr.success('Técnico salvo com sucesso!', 'Sucesso!');

@@ -83,7 +83,7 @@ export class MapaComponent implements OnInit {
 
     getIgrejas(): void {
         this.isLoaded = false;
-        this.angularFire.list(`igrejas`).valueChanges().subscribe(
+        this.angularFire.list(`regioes/${localStorage.getItem('userCity')}/igrejas`).valueChanges().subscribe(
             (data: [Igreja]) => {
                 this.igrejas = data;
                 this.isLoaded = true;

@@ -1,4 +1,4 @@
-<div class="modal fade" bsModal #createModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+<div class="modal fade" *ngIf="!isLoading" bsModal #createModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
   aria-labelledby="dialog-static-name">
   <div class="modal-dialog modal-md">
     <div class="modal-content">
@@ -25,10 +25,20 @@
               [(ngModel)]="usuario.email" name="email" required>
           </div>
 
+          <div class="form-group w-100">
+            <label>Cidade</label>
+            <select class="form-control" [(ngModel)]="usuario.regiao" name="regiao" #regiao="ngModel">
+                <option *ngFor="let regiao of regioes" [ngValue]="regiao">
+                    {{regiao.nome}}
+                </option>
+            </select>
+        </div>
+
           <div class="form-group">
             <label>Tipo de Usuário</label>
             <select class="form-control" [(ngModel)]="usuario.role" name="role" required>
               <option selected="selected">Selecione uma opção</option>
+              <option value="ADMINGERAL">Administrador Geral</option>
               <option value="ADMIN">Administrador</option>
               <option value="MINISTERIO">Ministério</option>
               <option value="USER">Usuário</option>

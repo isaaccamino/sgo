@@ -38,7 +38,7 @@ export class IgrejasComponent implements OnInit {
 
     getIgrejas() {
         this.isLoaded = false;
-        this.angularFire.list(`igrejas`).valueChanges().subscribe(
+        this.angularFire.list(`regioes/${localStorage.getItem('userCity')}/igrejas`).valueChanges().subscribe(
             data => {
                 this.igrejas = data;
                 this.isLoaded = true;

@@ -1,0 +1,38 @@
+<div class="modal fade" bsModal #createModal="bs-modal" [config]="{backdrop: 'static'}" tabindex="-1" role="dialog"
+    aria-labelledby="dialog-static-name">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" (click)="createModal.hide()">&times;</button>
+                <h4 class="modal-title">Cadastro de Cidade</h4>
+            </div>
+
+            <form #f="ngForm" autocomplete="off" (ngSubmit)="onSubmit(f)">
+
+
+                <div class="modal-body">
+                    <input autocomplete="false" type="hidden" name="id" [(ngModel)]="regiao.id">
+
+                    <div class="form-group">
+                        <label>Nome Cidade</label>
+                        <input autocomplete="false" type="text" class="form-control" placeholder="Nome Cidade"
+                            [(ngModel)]="regiao.nome" name="nome" #nomeRegiao="ngModel">
+                        <small *ngIf="nomeRegiao?.invalid && (nomeRegiao?.dirty || nomeRegiao?.touched)"
+                            class="danger form-text text-muted">
+                            <span *ngIf="nomeRegiao?.errors.required">
+                                Campo "Nome Cidade" é obrigatório!
+                            </span>
+                        </small>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn" (click)="createModal.hide()">Cancelar</button>
+                    <button type="submit" class="btn btn-success" [disabled]="!f.valid">Salvar</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>

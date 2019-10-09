@@ -126,7 +126,7 @@ export class CriarEventoComponent implements OnInit {
         }
 
         if (this.canSave || !this.isViewMode) {
-            this.angularFire.list(`agendamentos`).set(`${this.agendamento.id}`, event).then((t: any) => {
+            this.angularFire.list(`regioes/${localStorage.getItem('userCity')}/agendamentos`).set(`${this.agendamento.id}`, event).then((t: any) => {
                 this.modalAgendamento.emit(event);
                 this.createModal.hide();
                 this.allDayAgendamento = false;

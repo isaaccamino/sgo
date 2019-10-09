@@ -3,4 +3,5 @@ export class Usuario {
     nome: any;
     email: String;
     role: any;
+    regiao: any[];
 }
