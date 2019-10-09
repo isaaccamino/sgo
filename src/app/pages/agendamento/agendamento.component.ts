@@ -81,7 +81,7 @@ export class AgendamentoComponent implements OnInit {
 
     getEvents() {
         this.calendarIsLoaded = false;
-        this.angularFire.list(`agendamentos`).valueChanges().subscribe(
+        this.angularFire.list(`regioes/${localStorage.getItem('userCity')}/agendamentos`).valueChanges().subscribe(
             events => {
                 let teste = [];
                 teste = events;
