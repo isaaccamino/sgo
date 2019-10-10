@@ -62,7 +62,7 @@ export class HeaderComponent implements OnInit {
         this.sharedService.setTheme(this.maThemeModel)
     }
 
-    constructor(private sharedService: SharedService, private afAuth: AngularFireAuth, private router: Router, private angularFire: AngularFireDatabase) {
+    constructor(public sharedService: SharedService, private afAuth: AngularFireAuth, private router: Router, private angularFire: AngularFireDatabase) {
         sharedService.maThemeSubject.subscribe((value) => {
             this.maThemeModel = value;
         });
