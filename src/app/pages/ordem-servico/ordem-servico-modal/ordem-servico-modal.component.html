@@ -19,7 +19,7 @@
                     <div class="form-group w-100">
                         <label>Igreja</label>
                         <select class="form-control" [(ngModel)]="ordemServico.ccb" name="ccb" 
-                            [disabled]="!(roleUser==='ADMIN')" #ccb="ngModel">
+                            [disabled]="!(roleUser==='ADMIN' || 'ADMINGERAL')" #ccb="ngModel">
                             <option *ngFor="let church of churches" [ngValue]="church.id">
                                 {{church.bairro}}
                             </option>
@@ -36,7 +36,7 @@
                         <label>Motivo</label>
                         <textarea class="textarea" placeholder="Motivo da Manutenção" 
                             [(ngModel)]="ordemServico.motivo" name="motivo" rows="3"
-                            [disabled]="!(roleUser==='ADMIN')" #motivo="ngModel">
+                            [disabled]="!(roleUser==='ADMIN' || 'ADMINGERAL')" #motivo="ngModel">
                         </textarea>
                         <small *ngIf="motivo?.invalid && (motivo?.dirty || motivo?.touched)" 
                                 class="danger form-text text-muted">
@@ -56,7 +56,7 @@
 
                     <div class="form-group">
                         <label>Técnico 1</label>
-                        <select class="form-control" [(ngModel)]="ordemServico.tecnico1" #tecnico1="ngModel" name="tecnico1"  [disabled]="!(roleUser==='ADMIN')">
+                        <select class="form-control" [(ngModel)]="ordemServico.tecnico1" #tecnico1="ngModel" name="tecnico1"  [disabled]="!(roleUser==='ADMIN' || 'ADMINGERAL')">
                             <option *ngFor="let tecnico of tecnicos" [ngValue]="tecnico.id">
                             {{tecnico.nome}}
                             </option>
@@ -71,7 +71,7 @@
 
                     <div class="form-group">
                         <label>Técnico 2</label>
-                        <select class="form-control" #tecnico2="ngModel" [(ngModel)]="ordemServico.tecnico2" name="tecnico2"  [disabled]="!(roleUser==='ADMIN')">
+                        <select class="form-control" #tecnico2="ngModel" [(ngModel)]="ordemServico.tecnico2" name="tecnico2"  [disabled]="!(roleUser==='ADMIN' || 'ADMINGERAL')">
                             <option *ngFor="let tecnico of tecnicos" [ngValue]="tecnico.id">
                             {{tecnico.nome}}
                             </option>
@@ -103,7 +103,7 @@
                         <label>Data de Atendimento</label>
                         <input autocomplete="false"type="date" class="form-control" placeholder="Técnico"
                             [(ngModel)]="ordemServico.dataAtendimento" name="dataAtendimento"
-                            [disabled]="!(roleUser==='ADMIN')">
+                            [disabled]="!(roleUser==='ADMIN' || 'ADMINGERAL')">
                     </div>
 
                     <div class="form-group w-100">
