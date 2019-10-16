@@ -7,7 +7,7 @@
 <section class="content no-print">
   <header class="content__title">
     <h1>Ordem de Serviço</h1>
-    <div class="actions" *ngIf="shared.getUserRole() === 'ADMIN'">
+    <div class="actions" *ngIf="shared.getUserRole() === 'ADMIN' || 'ADMINGERAL'">
       <button class='btn btn-add' (click)="showModal()">
         <i class="actions__item zmdi zmdi-plus"></i>
         <span>Adicionar OS</span>
@@ -71,7 +71,7 @@
                     <span class="dropdown-item" (click)="showModal(order)">Editar</span>
                     <span class="dropdown-item" (click)="viewModalOS(order)">Visualizar</span>
                     <span class="dropdown-item" (click)="delete(order)"
-                      *ngIf="shared.getUserRole() === 'ADMIN'">Excluir</span>
+                      *ngIf="shared.getUserRole() === 'ADMIN' || 'ADMINGERAL'">Excluir</span>
                   </div>
                 </div>
               </td>
